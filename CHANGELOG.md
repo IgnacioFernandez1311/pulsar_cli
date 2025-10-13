@@ -1,3 +1,6 @@
+## 0.0.7
+- Added support for the newest Pulsar version.
+
 ## 0.0.6
 - Changed the directory provider from Directory class to Isolate.resolvePackageUri
 

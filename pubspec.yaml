@@ -8,6 +8,8 @@ topics:
   - web
   - frontend
 
+executable:
+  pulsar: pulsar
 
 environment:
   sdk: ^3.9.2

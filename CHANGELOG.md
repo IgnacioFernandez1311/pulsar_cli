@@ -1,3 +1,6 @@
+## 0.0.5
+- Changed the templates directory.
+
 ## 0.0.4
 - Included the templates for the create command.
 

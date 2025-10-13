@@ -1,3 +1,6 @@
+## 0.0.4
+- Included the templates for the create command.
+
 ## 0.0.3
 - Correction in the executables name.
 

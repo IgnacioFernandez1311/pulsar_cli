@@ -14,7 +14,7 @@ Then use the command `pulsar` for creating and serve Pulsar projects.
 
 ## Usage
 
-Use `create` to make a new project.
+Use `create` to make a new project. The `create` can define the `--template` as `default`, `empty` or `minimum`.
 
 ```bash
   pulsar create app_name

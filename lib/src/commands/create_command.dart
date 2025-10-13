@@ -14,7 +14,7 @@ class CreateCommand extends Command {
     argParser.addOption(
       'template',
       abbr: 't',
-      help: 'Initial template for a Pulsar project',
+      help: 'Default template: default. Also try other options: empty, minimum',
       defaultsTo: 'default',
     );
   }

@@ -4,7 +4,7 @@ version: 0.0.1
 repository: https://github.com/IgnacioFernandez1311/pulsar_cli
 
 topics:
-  - CLI
+  - cli
   - web
   - frontend
 

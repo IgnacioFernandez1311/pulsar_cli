@@ -3,7 +3,7 @@ import 'package:path/path.dart' as p;
 
 Future<void> copyTemplate(String template, Directory destination) async {
   final Directory templateDir = Directory(
-    p.join(p.current, 'lib', 'src', 'templates', '${template}_template'),
+    p.join('lib', 'src', 'templates', '${template}_template'),
   );
 
   if (!templateDir.existsSync()) {

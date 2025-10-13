@@ -15,7 +15,12 @@ environment:
   sdk: ^3.9.2
 
 include:
+  - bin/**
   - lib/**
+  - lib/src/templates/**
+  - pubspec.yaml
+  - CHANGELOG.md
+  - README.md
 
 dependencies:
   args: ^2.7.0

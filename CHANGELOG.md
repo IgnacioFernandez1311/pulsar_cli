@@ -1,3 +1,6 @@
+## 0.0.6
+- Changed the directory provider from Directory class to Isolate.resolvePackageUri
+
 ## 0.0.5
 - Changed the templates directory.
 

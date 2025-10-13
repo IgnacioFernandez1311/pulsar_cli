@@ -1,6 +1,6 @@
 name: pulsar_cli
 description: Command Line Interface for the Pulsar Web Framework.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/IgnacioFernandez1311/pulsar_cli
 
 topics:
@@ -8,7 +8,7 @@ topics:
   - web
   - frontend
 
-executable:
+executables:
   pulsar: pulsar
 
 environment:

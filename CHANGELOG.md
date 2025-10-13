@@ -1,3 +1,6 @@
+## 0.0.3
+- Correction in the executables name.
+
 ## 0.0.2
 - Correction in the executable.
 

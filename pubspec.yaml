@@ -1,5 +1,5 @@
 name: pulsar_cli
-description: A sample command-line application with basic argument parsing.
+description: Command Line Interface for the Pulsar Web Framework.
 version: 0.0.1
 repository: https://github.com/IgnacioFernandez1311/pulsar_cli
 

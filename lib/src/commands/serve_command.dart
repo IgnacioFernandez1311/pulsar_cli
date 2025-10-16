@@ -16,7 +16,6 @@ class ServeCommand extends Command {
       help: 'Port to serve the application',
     );
   }
-
   @override
   Future<void> run() async {
     final process = await Process.start('dart', [
@@ -27,7 +26,7 @@ class ServeCommand extends Command {
 
     process.exitCode.then((code) {
       if (code != 0) {
-        stderr.writeln('Error while executinwebdev serve (exit code $code)');
+        stderr.writeln('Error while executing webdev serve (exit code $code)');
       }
     });
   }

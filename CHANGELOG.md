@@ -1,3 +1,6 @@
+## 0.0.8
+- Added build command using webdev
+
 ## 0.0.7
 - Added support for the newest Pulsar version.
 

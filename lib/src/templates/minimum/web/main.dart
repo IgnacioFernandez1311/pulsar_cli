@@ -1,12 +1,10 @@
 import 'package:pulsar_web/pulsar.dart';
 
 void main() {
-  runApp([Hello()]);
+  runApp(Hello());
 }
 
-class Hello extends Component {
+class Hello extends ContentView {
   @override
-  Future<String> template() async => "<h1>Hello World!</h1>";
-  @override
-  Map<String, dynamic> props() => {};
+  Future<String> get template async => "<h1>Hello World!</h1>";
 }

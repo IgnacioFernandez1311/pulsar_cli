@@ -1,10 +1,10 @@
 import 'package:pulsar_web/pulsar.dart';
 
-class CounterApp extends Component {
+class CounterApp extends ContentView {
   int count = 0;
 
   @override
-  Map<String, dynamic> props() => {'count': count};
+  Map<String, dynamic> get props => {'count': count};
 
   @override
   Map<String, Function> get methodRegistry => {
@@ -13,10 +13,10 @@ class CounterApp extends Component {
   };
 
   @override
-  Future<String> template() async =>
+  Future<String> get template async =>
       await loadFile('components/counter/counter.html');
   @override
-  Future<String?> style() async =>
+  Future<String?> get style async =>
       await loadFile('components/counter/counter.css');
 
   void increment(PulsarEvent event) => setState(() => count++);

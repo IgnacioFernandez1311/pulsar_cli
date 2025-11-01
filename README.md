@@ -41,5 +41,5 @@ You can build a project to production using the following command.
 
 ### TODO
 
-- Hot Reload
 - DevServer for `serve` command
+- `build` command minification for production

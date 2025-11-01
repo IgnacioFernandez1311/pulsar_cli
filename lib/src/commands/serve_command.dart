@@ -15,13 +15,23 @@ class ServeCommand extends Command {
       defaultsTo: '8080',
       help: 'Port to serve the application',
     );
+    argParser.addFlag(
+      'hot-reload',
+      abbr: 'H',
+      defaultsTo: false,
+      help: 'Live reload flag (disabled by default)'
+    );
   }
   @override
   Future<void> run() async {
+    final port = argResults?['port'];
+    final hotReload = argResults?['hot-reload'];
     final process = await Process.start('dart', [
       'run',
       'webdev',
       'serve',
+      'web:$port',
+      hotReload ? '--auto=refresh' : ''
     ], mode: ProcessStartMode.inheritStdio);
 
     process.exitCode.then((code) {

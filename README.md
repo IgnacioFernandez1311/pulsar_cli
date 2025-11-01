@@ -28,7 +28,7 @@ Serve a local server using the following command.
 ```bash
   pulsar serve
 ```
-The server will be running at the 8080 port.
+The server will be running at the 8080 port by default.
 
 ## Building
 
@@ -42,4 +42,5 @@ You can build a project to production using the following command.
 ### TODO
 
 - DevServer for `serve` command
+- Hot reload for `serve` command
 - `build` command minification for production

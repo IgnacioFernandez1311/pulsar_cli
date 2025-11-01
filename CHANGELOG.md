@@ -1,6 +1,8 @@
+## 0.0.12
+- Custom port option added.
+
 ## 0.0.11
-- Added support for the newest version of Pulsar 0.2.1-
-- Added custom port configuration to the serve command and Hot Reload flag.
+- Added support for the newest version of Pulsar 0.2.1.
 
 ## 0.0.10
 - Added support for the newest version of Pulsar 0.2.0.

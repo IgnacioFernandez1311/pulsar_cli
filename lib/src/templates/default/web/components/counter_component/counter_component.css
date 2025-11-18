@@ -18,3 +18,8 @@
   border: 0px;
   border-radius: 50%;
 }
+
+.button-circular:hover {
+  cursor: pointer;
+  background-color: #e0e0e0;
+}

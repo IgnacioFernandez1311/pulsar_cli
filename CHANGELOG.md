@@ -1,3 +1,6 @@
+## 0.0.13
+- Added suport for the newest version of Pulsar 0.3.0.
+
 ## 0.0.12
 - Custom port option added.
 

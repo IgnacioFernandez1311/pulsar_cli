@@ -10,4 +10,7 @@ class CounterComponent extends Component {
   @override
   Future<String> get template async =>
       await loadFile('components/counter_component/counter_component.html');
+  @override
+  Future<String?> get style async =>
+      await loadFile('componnets/counter_component/counter_component.css');
 }

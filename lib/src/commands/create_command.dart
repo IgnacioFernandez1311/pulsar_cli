@@ -41,6 +41,8 @@ class CreateCommand extends Command {
     print('Creating the Pulsar project "$projectName"');
     await copyTemplate(template, destination);
     print('Project created successfully');
-    print('cd $projectName && pulsar serve');
+    print('cd $projectName');
+    print('dart pub get');
+    print('pulsar serve');
   }
 }

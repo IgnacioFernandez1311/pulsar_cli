@@ -1,3 +1,6 @@
+## 0.0.15
+- Added support for the newest version of Pulsar 0.3.1.
+
 ## 0.0.14
 - Default template fix.
 

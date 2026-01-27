@@ -16,9 +16,12 @@ class CounterApp extends Component {
     return div(
       children: <PulsarNode>[
         h1(children: [text("Welcome to Pulsar Web")]),
-        img(attrs: {"src": StringAttribute("assets/Logo.png")}),
+        img(
+          classes: "logo",
+          attrs: {"src": StringAttribute("assets/Logo.png")},
+        ),
         hr(),
-        h2(children: [text("$count")]),
+        h2(children: [text("Count is $count")]),
         div(
           classes: "buttons",
           children: <PulsarNode>[

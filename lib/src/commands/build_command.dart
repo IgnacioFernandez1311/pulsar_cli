@@ -14,7 +14,7 @@ class BuildCommand extends Command {
       'run',
       'webdev',
       'build',
-      '--no-release',
+      '--release',
     ], mode: ProcessStartMode.inheritStdio);
 
     process.exitCode.then((code) {

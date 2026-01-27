@@ -1,10 +1,12 @@
 import 'package:pulsar_web/pulsar.dart';
 
 void main() {
-  runApp(Hello());
+  mountApp(Hello(), selector: "#app");
 }
 
-class Hello extends ContentView {
+class Hello extends Component {
   @override
-  Future<String> get template async => "<h1>Hello World!</h1>";
+  PulsarNode render() {
+    return h1(children: <PulsarNode>[text("Hello World")]);
+  }
 }

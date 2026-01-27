@@ -14,7 +14,6 @@ Then use the command `pulsar` for creating and serve Pulsar projects.
 
 ## Usage
 
-> Disclaimer: The versions 0.0.x can be strongly modified in future versions of the CLI.
 
 Use `create` to make a new project. The `create` can define the `--template` as `default`, `empty` or `minimum`.
 
@@ -28,7 +27,7 @@ Serve a local server using the following command.
 ```bash
   pulsar serve
 ```
-The server will be running at the 8080 port by default.
+The server will be running at the 8080 port by default. If you want to use another port you can use the `port` option of this command. Run `pulsar help` for more information.
 
 ## Building
 
@@ -43,4 +42,3 @@ You can build a project to production using the following command.
 
 - DevServer for `serve` command
 - Hot reload for `serve` command
-- `build` command minification for production

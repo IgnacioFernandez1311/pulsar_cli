@@ -1,3 +1,6 @@
+## 0.1.1
+- Quick fix at default template.
+
 ## 0.1.0
 - Support for the newest version of Pulsar 0.4.0.
 - Breaking changes to the templates for create command.

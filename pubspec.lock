@@ -530,7 +530,7 @@ packages:
     source: hosted
     version: "8.0.5"
   universal_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: universal_web
       sha256: "045d5d5277f7dd3b6838b08098f5ec4cfb15b790c5d3deb8e79f642ae1af3ad2"

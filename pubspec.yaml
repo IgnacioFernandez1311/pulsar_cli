@@ -24,6 +24,7 @@ include:
   - README.md
 
 dependencies:
+  universal_web: ^1.1.1
   args: ^2.7.0
   path: ^1.9.1
   pulsar_web: ^0.4.0

@@ -1,5 +1,4 @@
 import 'package:pulsar_web/pulsar.dart';
-import 'package:universal_web/web.dart';
 
 class CounterApp extends Component {
   @override
@@ -27,12 +26,12 @@ class CounterApp extends Component {
           children: <PulsarNode>[
             button(
               classes: "button-circular",
-              attrs: <String, Attribute>{'onClick': EventAttribute(decrement)},
+              onClick: decrement,
               children: <PulsarNode>[text('-')],
             ),
             button(
               classes: "button-circular",
-              attrs: <String, Attribute>{'onClick': EventAttribute(increment)},
+              onClick: increment,
               children: <PulsarNode>[text("+")],
             ),
           ],

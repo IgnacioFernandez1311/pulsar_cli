@@ -445,10 +445,10 @@ packages:
     dependency: "direct main"
     description:
       name: pulsar_web
-      sha256: aa8a7f6c7e87deab4c37ffa4de7870a69b3c60516655f83044dd01eb033c9c03
+      sha256: "0260568ce2d8ff868d27e8c69771a39685ac1b841558ad09993f5338b3c53938"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.1"
   scratch_space:
     dependency: transitive
     description:

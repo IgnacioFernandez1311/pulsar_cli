@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   universal_web: ^1.1.1
-  pulsar_web: ^0.4.0
+  pulsar_web: ^0.4.1
   jinja: ^0.6.4
 
 dev_dependencies:

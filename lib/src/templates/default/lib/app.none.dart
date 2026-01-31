@@ -1,8 +1,8 @@
 import 'package:pulsar_web/pulsar.dart';
 
-class CounterApp extends Component {
+class App extends Component {
   @override
-  List<Stylesheet> get styles => [css("components/counter/counter.css")];
+  List<Stylesheet> get styles => [css("styles/app.css")];
 
   int count = 0;
 

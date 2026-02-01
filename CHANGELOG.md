@@ -1,3 +1,6 @@
+## 0.2.1
+- Fix of --watch option on serve command
+
 ## 0.2.0
 - Added custom serve command with fallback system for better routing experience.
 - Added custom build command with dart compile for better control and redirect files after compilation so the routing can work properly.

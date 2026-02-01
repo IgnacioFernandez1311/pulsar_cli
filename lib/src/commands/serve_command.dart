@@ -22,6 +22,7 @@ class ServeCommand extends Command {
 
   final _reloadClients = <WebSocket>[];
   Timer? _debounce;
+  bool _isCompiling = false;
 
   @override
   Future<void> run() async {
@@ -48,12 +49,12 @@ class ServeCommand extends Command {
     print(
       watch
           ? '🔥 Pulsar dev server (watch) → http://localhost:$port'
-          : '🚀 Pulsar running at http://localhost:$port',
+          : '🚀 Pulsar running → http://localhost:$port',
     );
 
     await for (final request in server) {
       if (request.uri.path == '/__pulsar_ws') {
-        _handleWebSocket(request);
+        await _handleWebSocket(request);
         continue;
       }
 
@@ -68,11 +69,29 @@ class ServeCommand extends Command {
   void _startWatcher(String cwd, Directory webDir, Directory libDir) {
     print('👀 Watching for file changes...');
 
-    void onChange(FileSystemEvent _) {
+    bool shouldIgnore(String path) {
+      return path.endsWith('.js') ||
+          path.endsWith('.dart.js') ||
+          path.endsWith('.js.map') ||
+          path.endsWith('.map');
+    }
+
+    void onChange(FileSystemEvent event) {
+      // 🔒 Ignore our own compilation output
+      if (_isCompiling) return;
+
+      // 🔕 Ignore directory-level noise
+      if (event is FileSystemModifyEvent && event.isDirectory) return;
+
+      // 🔕 Ignore JS & map outputs
+      if (shouldIgnore(event.path)) return;
+
       _debounce?.cancel();
       _debounce = Timer(const Duration(milliseconds: 400), () async {
         print('🔁 Changes detected, rebuilding...');
+        _isCompiling = true;
         await _compile(cwd);
+        _isCompiling = false;
         _notifyReload();
       });
     }
@@ -124,10 +143,10 @@ class ServeCommand extends Command {
   }
 
   /* -------------------------------------------------------------------------- */
-  /*                                WebSocket reload                              */
+  /*                                WebSocket reload                             */
   /* -------------------------------------------------------------------------- */
 
-  void _handleWebSocket(HttpRequest request) async {
+  Future<void> _handleWebSocket(HttpRequest request) async {
     final socket = await WebSocketTransformer.upgrade(request);
     _reloadClients.add(socket);
 
@@ -159,7 +178,8 @@ class ServeCommand extends Command {
 
     final file = File('${webDir.path}$path');
 
-    if (file.existsSync()) {
+    if (file.existsSync() &&
+        file.statSync().type == FileSystemEntityType.file) {
       return _serveFile(request, file);
     }
 
@@ -173,7 +193,6 @@ class ServeCommand extends Command {
     bool injectReload,
   ) async {
     final index = File('${webDir.path}/index.html');
-
     var html = await index.readAsString();
 
     if (injectReload) {

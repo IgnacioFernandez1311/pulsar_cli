@@ -12,7 +12,7 @@ class App extends Component {
     return div(
       children: <PulsarNode>[
         h2(children: [text("Welcome to Pulsar Web")]),
-        img(attrs: {"src": StringAttribute("assets/Logo.png")}),
+        img(src: "assets/Logo.png"),
         hr(),
         h3(children: [text("Count is $count")]),
         div(

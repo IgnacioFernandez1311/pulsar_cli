@@ -77,8 +77,8 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  pulsar_web: ^0.4.2
-  universal_web: ^1.1.1
+  pulsar_web: ^0.4.4+1
+  universal_web: ^1.1.1+1
 
 dev_dependencies:
   lints: ^6.0.0

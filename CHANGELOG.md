@@ -1,3 +1,6 @@
+## 0.2.2
+- Added support for latest version of Pulsar 0.4.4+1
+
 ## 0.2.1
 - Fix of --watch option on serve command
 

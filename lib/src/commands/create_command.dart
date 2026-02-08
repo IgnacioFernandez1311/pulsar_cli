@@ -20,7 +20,7 @@ class CreateCommand extends Command {
       ..addOption(
         'use-cdn',
         defaultsTo: 'none',
-        help: 'UI CDN to use: none, materialize',
+        help: 'UI CDN to use: none, materialize, tailwind',
       );
   }
 
@@ -77,7 +77,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  pulsar_web: ^0.4.4+1
+  pulsar_web: ^0.4.5
   universal_web: ^1.1.1+1
 
 dev_dependencies:

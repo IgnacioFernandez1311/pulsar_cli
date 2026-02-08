@@ -1,6 +1,6 @@
 name: pulsar_cli
 description: Command Line Interface for the Pulsar Web Framework.
-version: 0.2.2
+version: 0.2.3
 repository: https://github.com/IgnacioFernandez1311/pulsar_cli
 homepage: https://pulsar-web.netlify.app
 
@@ -27,7 +27,7 @@ dependencies:
   universal_web: ^1.1.1+1
   args: ^2.7.0
   path: ^1.9.1
-  pulsar_web: ^0.4.4+1
+  pulsar_web: ^0.4.5
 
 dev_dependencies:
   lints: ^6.0.0

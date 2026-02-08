@@ -17,7 +17,7 @@ Then use the command `pulsar` for creating and serve Pulsar projects.
 
 Use `create` to make a new project. The `create` can define two options:
 - `--template`: `default`, `minimum`, `empty`
-- `--use-cdn`: `none`, `materialize`. Defaults on `none`.
+- `--use-cdn`: `none`, `materialize`, `tailwind`. Defaults on `none`.
 
 ```bash
   pulsar create app_name

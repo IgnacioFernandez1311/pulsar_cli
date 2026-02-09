@@ -1,3 +1,6 @@
+## 0.2.6
+- Added support for latest version of Pulsar 0.4.6.
+
 ## 0.2.5
 - Added better initial templates.
 

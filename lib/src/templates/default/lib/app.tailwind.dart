@@ -4,34 +4,54 @@ class App extends Component {
   int count = 0;
 
   void increment(Event event) => setState(() => count++);
-
   void decrement(Event event) => setState(() => count--);
 
   @override
   PulsarNode render() {
     return div(
-      children: <PulsarNode>[
-        h1(classes: "text-4xl", children: [text("Welcome to Pulsar Web")]),
+      classes: "flex flex-col items-center gap-4 text-center",
+      children: [
         img(
-          classes: "m-auto place-content-center p-4 my-4",
-          width: 240,
-          height: 240,
           src: "assets/Logo.png",
+          width: 140,
+          height: 140,
+          classes: "mt-4 opacity-90",
         ),
-        hr(),
-        h2(classes: "text-2xl mt-6 mb-2", children: [text("Count is $count")]),
+
+        h1(classes: "text-3xl font-medium m-0", children: [text("Pulsar Web")]),
+
+        p(
+          classes: "max-w-xs text-sm text-gray-400 m-0",
+          children: [
+            text(
+              "Pulsar is a declarative web framework focused on clarity, explicit state and predictable rendering. ",
+            ),
+            a(
+              href: "https://pulsar-web.netlify.app/docs",
+              target: "_blank",
+              classes:
+                  "text-indigo-500 font-medium transition hover:text-indigo-400",
+              children: [text("Read the documentation.")],
+            ),
+          ],
+        ),
+
+        div(classes: "my-2 text-5xl font-mono", children: [text("$count")]),
+
         div(
-          classes: "flex justify-center",
-          children: <PulsarNode>[
+          classes: "flex gap-4",
+          children: [
             button(
-              classes: "rounded-full p-2 m-4 w-16 h-16 text-4xl bg-gray-300",
               onClick: decrement,
-              children: <PulsarNode>[text('-')],
+              classes:
+                  "w-10 h-10 rounded-full border border-gray-300 text-gray-200 text-xl transition hover:bg-gray-800",
+              children: [text("−")],
             ),
             button(
-              classes: "rounded-full p-2 m-4 w-16 h-16 text-4xl bg-gray-300",
               onClick: increment,
-              children: <PulsarNode>[text("+")],
+              classes:
+                  "w-10 h-10 rounded-full border border-gray-300 text-gray-200 text-xl transition hover:bg-gray-800",
+              children: [text("+")],
             ),
           ],
         ),

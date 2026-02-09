@@ -1,25 +1,67 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
 .logo {
-  margin-top: 20px;
-  max-width: 200px;
+  margin-top: 16px;
+  width: 140px;
+  height: 140px;
+  opacity: 0.9;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.description {
+  max-width: 320px;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.counter {
+  margin: 8px 0;
+  font-size: 3rem;
+  font-family: monospace;
 }
 
 .buttons {
-
-  margin: 0 auto;
-  max-width: 120px;
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
 }
 
 .button-circular {
-  font-size: 24px;
-  width: 50px;
-  height: 50px;
-  border: 0px;
+  width: 40px;
+  height: 40px;
+  color: #e5e7eb;
+  font-size: 22px;
   border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
 }
 
 .button-circular:hover {
   cursor: pointer;
-  background-color: #e0e0e0;
+  background-color: #232426;
 }
+
+.doc-link {
+  color: #364f83;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.doc-link:hover {
+  transition: all 0.3s;
+  color: #556fac;
+  cursor: pointer;
+}
+

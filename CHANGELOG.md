@@ -1,3 +1,6 @@
+## 0.2.5
+- Added better initial templates.
+
 ## 0.2.4
 - Fix on index.html absolute routes for styles and main
 

@@ -1,3 +1,6 @@
+## 0.2.4
+- Fix on index.html absolute routes for styles and main
+
 ## 0.2.3
 - Added support for latest version of Pulsar 0.4.5.
 - Added new CDN template with tailwind support.

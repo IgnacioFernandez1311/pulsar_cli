@@ -47,9 +47,7 @@ class App extends Component {
                   onClick: decrement,
                   classes:
                       "btn-floating transparent z-depth-0 white-text grey darken-3",
-                  children: [
-                    i(classes: "material-icons", children: [text("remove")]),
-                  ],
+                  children: [text("-")],
                 ),
               ],
             ),
@@ -60,9 +58,7 @@ class App extends Component {
                   onClick: increment,
                   classes:
                       "btn-floating transparent z-depth-0 white-text grey darken-3",
-                  children: [
-                    i(classes: "material-icons", children: [text("add")]),
-                  ],
+                  children: [text("+")],
                 ),
               ],
             ),

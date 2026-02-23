@@ -1,95 +1,89 @@
 import 'dart:io';
 import 'package:args/command_runner.dart';
+import 'package:mason_logger/mason_logger.dart';
+import './dev/pulsar_compiler.dart';
 
 class BuildCommand extends Command {
   @override
   String get name => 'build';
 
   @override
-  String get description => 'Build the Pulsar project for production.';
+  String get description => 'Build the Pulsar project for production';
 
   BuildCommand() {
     argParser.addFlag(
       'release',
       defaultsTo: true,
-      help: 'Build in release mode (minified)',
+      help: 'Build in release mode (optimized)',
     );
   }
 
+  final logger = Logger();
+
   @override
   Future<void> run() async {
-    final projectRoot = Directory.current;
-    final webDir = Directory('${projectRoot.path}/web');
-    final buildDir = Directory('${projectRoot.path}/build');
+    final root = Directory.current;
+    final webDir = Directory('${root.path}/web');
+    final buildDir = Directory('${root.path}/build');
 
     if (!webDir.existsSync()) {
-      throw Exception('Missing web/ directory');
+      logger.err('web/ directory not found');
+      return;
     }
 
-    // 1️⃣ Clean build/
+    final compiler = PulsarCompiler(root: root, mode: CompileMode.release);
+
+    final progress = logger.progress('Building project...');
+
+    final result = await compiler.compile();
+
+    if (!result.success) {
+      progress.fail('Compilation failed');
+      logger.err(result.error ?? '');
+      return;
+    }
+
     if (buildDir.existsSync()) {
       buildDir.deleteSync(recursive: true);
     }
     buildDir.createSync(recursive: true);
 
-    // 2️⃣ Copy web/ → build/ (RECURSIVE, RAW)
     await _copyDirectory(webDir, buildDir);
 
-    // 3️⃣ Compile Dart → JS
-    final entrypoint = File('${webDir.path}/main.dart');
-    if (!entrypoint.existsSync()) {
-      throw Exception('Missing web/main.dart');
-    }
+    // Replace main.dart.js
+    await compiler.jsOutput.copy('${buildDir.path}/main.dart.js');
 
-    stdout.writeln('Compiling Dart to JavaScript...');
+    // Inject CSS file
+    await compiler.cssOutput.copy('${buildDir.path}/pulsar.css');
 
-    final result = await Process.start(
-      'dart',
-      [
-        'compile',
-        'js',
-        entrypoint.path,
-        '-o',
-        '${buildDir.path}/main.dart.js',
-        if (argResults?['release'] == true) '-O4',
-      ],
-      workingDirectory: projectRoot.path,
-      mode: ProcessStartMode.inheritStdio,
-    );
-
-    final exitCode = await result.exitCode;
-    if (exitCode != 0) {
-      throw Exception('Dart compilation failed');
-    }
-
-    // 4️⃣ SPA redirects
     await _writeRedirects(buildDir);
 
-    stdout.writeln('✔ Build completed successfully');
+    progress.complete(
+      'Build completed in ${result.duration.inMilliseconds}ms 🚀',
+    );
   }
 
-  /// Copies a directory recursively (FILES + SUBFOLDERS)
+  /* -------------------------------------------------------------------------- */
+  /*                               UTILITIES                                    */
+  /* -------------------------------------------------------------------------- */
+
   Future<void> _copyDirectory(Directory source, Directory destination) async {
     await for (final entity in source.list(recursive: true)) {
-      final relativePath = entity.path.substring(source.path.length + 1);
-      final newPath = '${destination.path}/$relativePath';
+      final relative = entity.path.substring(source.path.length + 1);
+      final newPath = '${destination.path}/$relative';
 
       if (entity is Directory) {
         await Directory(newPath).create(recursive: true);
       } else if (entity is File) {
-        await File(newPath).create(recursive: true);
         await entity.copy(newPath);
       }
     }
   }
 
-  /// Adds SPA fallback for popular hosts
   Future<void> _writeRedirects(Directory buildDir) async {
-    // Netlify
     final netlify = File('${buildDir.path}/_redirects');
     netlify.writeAsStringSync('/* /index.html 200\n');
 
-    // Vercel
     final vercel = File('${buildDir.path}/vercel.json');
     vercel.writeAsStringSync('''
 {
@@ -98,7 +92,5 @@ class BuildCommand extends Command {
   ]
 }
 ''');
-
-    // GitHub Pages note (documented, not auto-fixable)
   }
 }

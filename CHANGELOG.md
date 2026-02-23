@@ -1,3 +1,11 @@
+## 0.2.7
+- Added several changes to `serve` and `build` commands.
+- Created `DevServer` and `DevLogger` for better DX.
+- Added rebuild and quit options on serve.
+- Added `clean` command.
+- Added `doctor` command.
+- Building files like `main.dart.js` were moved to `.dart_tool` at `pulsar/`
+
 ## 0.2.6
 - Added support for latest version of Pulsar 0.4.6.
 

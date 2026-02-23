@@ -43,19 +43,25 @@ class BuildCommand extends Command {
       return;
     }
 
+    // Clean previous build
     if (buildDir.existsSync()) {
       buildDir.deleteSync(recursive: true);
     }
     buildDir.createSync(recursive: true);
 
+    // Copy web directory
     await _copyDirectory(webDir, buildDir);
 
-    // Replace main.dart.js
+    // Replace JS bundle
     await compiler.jsOutput.copy('${buildDir.path}/main.dart.js');
 
-    // Inject CSS file
+    // Copy extracted CSS
     await compiler.cssOutput.copy('${buildDir.path}/pulsar.css');
 
+    // Inject CSS link into index.html
+    await _injectCssLink(buildDir);
+
+    // Write SPA redirects
     await _writeRedirects(buildDir);
 
     progress.complete(
@@ -77,6 +83,23 @@ class BuildCommand extends Command {
       } else if (entity is File) {
         await entity.copy(newPath);
       }
+    }
+  }
+
+  Future<void> _injectCssLink(Directory buildDir) async {
+    final indexFile = File('${buildDir.path}/index.html');
+
+    if (!indexFile.existsSync()) return;
+
+    var content = await indexFile.readAsString();
+
+    if (!content.contains('pulsar.css')) {
+      content = content.replaceFirst(
+        '</head>',
+        '  <link rel="stylesheet" href="pulsar.css">\n</head>',
+      );
+
+      await indexFile.writeAsString(content);
     }
   }
 

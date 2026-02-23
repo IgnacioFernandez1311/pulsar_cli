@@ -28,6 +28,10 @@ class PulsarCompiler {
     cssOutput = File('${pulsarDir.path}/pulsar.css');
   }
 
+  /* ---------------------------------------------------------- */
+  /* MAIN COMPILE                                               */
+  /* ---------------------------------------------------------- */
+
   Future<CompileResult> compile() async {
     final stopwatch = Stopwatch()..start();
 
@@ -35,7 +39,6 @@ class PulsarCompiler {
       pulsarDir.createSync(recursive: true);
 
       final entry = File('${root.path}/web/main.dart');
-
       if (!entry.existsSync()) {
         return CompileResult(
           success: false,
@@ -79,9 +82,90 @@ class PulsarCompiler {
     }
   }
 
+  /* ---------------------------------------------------------- */
+  /* CSS EXTRACTION                                             */
+  /* ---------------------------------------------------------- */
+
   Future<void> _extractCss() async {
-    // Aquí luego irá el extractor real
-    const css = '/* Pulsar extracted styles */';
+    final cssImports = await _scanCssImports();
+
+    if (cssImports.isEmpty) {
+      await cssOutput.writeAsString('');
+      return;
+    }
+
+    final buffer = StringBuffer();
+
+    for (final path in cssImports) {
+      final file = File('${root.path}/web/$path');
+      if (file.existsSync()) {
+        buffer.writeln(await file.readAsString());
+      }
+    }
+
+    var css = buffer.toString();
+
+    if (mode == CompileMode.release) {
+      css = _minifyCss(css);
+    }
+
     await cssOutput.writeAsString(css);
+  }
+
+  /* ---------------------------------------------------------- */
+  /* CSS ANALYZER (SCAN css("file.css"))                       */
+  /* ---------------------------------------------------------- */
+
+  Future<Set<String>> _scanCssImports() async {
+    final cssFiles = <String>{};
+
+    final libDir = Directory('${root.path}/lib');
+    final webDir = Directory('${root.path}/web');
+
+    final regex = RegExp(r'''css\(["']([^"']+)["']\)''');
+
+    Future<void> scanDir(Directory dir) async {
+      if (!dir.existsSync()) return;
+
+      await for (final entity in dir.list(recursive: true)) {
+        if (entity is File && entity.path.endsWith('.dart')) {
+          final content = await entity.readAsString();
+          final matches = regex.allMatches(content);
+
+          for (final match in matches) {
+            cssFiles.add(match.group(1)!);
+          }
+        }
+      }
+    }
+
+    await scanDir(libDir);
+    await scanDir(webDir);
+
+    return cssFiles;
+  }
+
+  /* ---------------------------------------------------------- */
+  /* CSS MINIFIER                                               */
+  /* ---------------------------------------------------------- */
+
+  String _minifyCss(String css) {
+    // Remove comments
+    css = css.replaceAll(RegExp(r'/\*[\s\S]*?\*/'), '');
+
+    // Collapse whitespace
+    css = css.replaceAll(RegExp(r'\s+'), ' ');
+
+    // Remove space around symbols
+    css = css.replaceAll(RegExp(r'\s*{\s*'), '{');
+    css = css.replaceAll(RegExp(r'\s*}\s*'), '}');
+    css = css.replaceAll(RegExp(r'\s*:\s*'), ':');
+    css = css.replaceAll(RegExp(r'\s*;\s*'), ';');
+    css = css.replaceAll(RegExp(r'\s*,\s*'), ',');
+
+    // Remove last semicolon before }
+    css = css.replaceAll(RegExp(r';}'), '}');
+
+    return css.trim();
   }
 }

@@ -140,7 +140,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  pulsar_web: ^0.4.6
+  pulsar_web: ^0.4.7
   universal_web: ^1.1.1+1
 
 dev_dependencies:

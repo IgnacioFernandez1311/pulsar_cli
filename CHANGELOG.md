@@ -1,3 +1,6 @@
+## 0.2.8
+- Quick fix for create command prompt
+
 ## 0.2.7
 - Added several changes to `serve` and `build` commands.
 - Created `DevServer` and `DevLogger` for better DX.

@@ -16,18 +16,15 @@ class CreateCommand extends Command {
       ..addOption(
         'template',
         abbr: 't',
-        defaultsTo: 'default',
         help: 'Define the initial template. default, minimum or empty',
       )
       ..addOption(
         'use-cdn',
-        defaultsTo: 'none',
         help:
             'Define the CDN to use. tailwind, materialize or none for vanilla CSS',
       )
       ..addOption(
         'icons',
-        defaultsTo: 'none',
         help: 'Icon library to include: none, material or bootstrap',
       )
       ..addFlag(

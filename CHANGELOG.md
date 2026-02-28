@@ -1,3 +1,6 @@
+## 0.2.10
+- Added support for latest version of Pulsar 0.4.9+1
+
 ## 0.2.9
 - Avoided FOUC and added support for the latest version of Pulsar 0.4.7
 - CSS minification on release mode build

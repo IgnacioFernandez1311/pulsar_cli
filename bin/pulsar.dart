@@ -7,7 +7,7 @@ import 'package:pulsar_cli/src/commands/doctor_command.dart';
 import 'package:pulsar_cli/src/commands/serve_command.dart';
 
 Future<void> main(List<String> args) async {
-  final String cliVersion = '0.3.0';
+  final String cliVersion = '0.3.1';
   final CommandRunner runner =
       CommandRunner(
           'pulsar',

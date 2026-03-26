@@ -1,3 +1,6 @@
+# 0.3.1
+- Fix on build command for better deeplinks.
+
 ## 0.3.0
 - Added support for the stable 1.0.0 version of Pulsar Web Framework.
 - Templates rethinked.

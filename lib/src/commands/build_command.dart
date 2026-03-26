@@ -96,7 +96,7 @@ class BuildCommand extends Command {
     if (!content.contains('pulsar.css')) {
       content = content.replaceFirst(
         '</head>',
-        '  <link rel="stylesheet" href="pulsar.css">\n</head>',
+        '  <link rel="stylesheet" href="/pulsar.css">\n</head>',
       );
 
       await indexFile.writeAsString(content);

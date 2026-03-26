@@ -1,70 +1,48 @@
 import 'package:pulsar_web/pulsar.dart';
 
-class App extends Component {
+final class App extends Component {
   int count = 0;
 
-  void increment(Event event) => setState(() => count++);
-  void decrement(Event event) => setState(() => count--);
+  void increment(Event event) => morph(() => count++);
+  void decrement(Event event) => morph(() => count--);
 
   @override
-  PulsarNode render() {
-    return div(
-      classes: "container",
-      children: [
-        img(
-          src: "assets/Logo.png",
-          width: 140,
-          height: 140,
-          classes: "responsive-img",
-        ),
+  Morphic render() {
+    return Div().classes("container")([
+      Img()
+          .src("assets/Logo.png")
+          .width(140)
+          .height(140)
+          .classes("responsive-img")(),
 
-        h4(classes: "grey-text text-lighten-3", children: [text("Pulsar Web")]),
+      H4().classes("grey-text text-lighten-3")(["Pulsar Web"]),
 
-        p(
-          classes: "grey-text text-lighten-1",
-          children: [
-            text(
-              "Pulsar is a declarative web framework focused on clarity, explicit state and predictable rendering. ",
-            ),
-            a(
-              href: "https://pulsar-web.netlify.app/docs",
-              target: "_blank",
-              classes: "indigo-text text-lighten-2",
-              children: [text("Read the documentation.")],
-            ),
-          ],
-        ),
+      P().classes("grey-text text-lighten-1")([
+        "Pulsar is a declarative web framework focused on clarity, explicit state and predictable rendering. ",
+        A()
+            .href("https://pulsar-web.netlify.app/docs")
+            .target(Target.blank)
+            .classes("indigo-text text-lighten-2")(["Read the documentation."]),
+      ]),
 
-        h3(classes: "white-text", children: [text("$count")]),
+      H3().classes("white-text")(["$count"]),
 
-        div(
-          classes: "row",
-          children: [
-            div(
-              classes: "col s6 center-align",
-              children: [
-                button(
-                  onClick: decrement,
-                  classes:
-                      "btn-floating transparent z-depth-0 white-text grey darken-3",
-                  children: [text("-")],
-                ),
-              ],
-            ),
-            div(
-              classes: "col s6 center-align",
-              children: [
-                button(
-                  onClick: increment,
-                  classes:
-                      "btn-floating transparent z-depth-0 white-text grey darken-3",
-                  children: [text("+")],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
+      Div().classes("row")([
+        Div().classes("col s6 center-align")([
+          Button()
+              .onClick(decrement)
+              .classes(
+                "btn-floating transparent z-depth-0 white-text grey darken-3",
+              )(["-"]),
+        ]),
+      ]),
+      Div().classes("col s6 center-align")([
+        Button()
+            .onClick(increment)
+            .classes(
+              "btn-floating transparent z-depth-0 white-text grey darken-3",
+            )(["+"]),
+      ]),
+    ]);
   }
 }

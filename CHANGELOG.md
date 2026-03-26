@@ -1,3 +1,7 @@
+## 0.3.0
+- Added support for the stable 1.0.0 version of Pulsar Web Framework.
+- Templates rethinked.
+
 ## 0.2.10
 - Added support for latest version of Pulsar 0.4.9+1
 

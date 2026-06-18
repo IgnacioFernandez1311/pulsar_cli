@@ -137,7 +137,7 @@ description: A Pulsar application
 version: 0.1.0
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.11.5
 
 dependencies:
   pulsar_web: ^1.0.1

@@ -1,3 +1,4 @@
+import 'package:pulsar_web/engine/morphic/enums.dart';
 import 'package:pulsar_web/pulsar.dart';
 
 final class App extends Component {
@@ -21,7 +22,7 @@ final class App extends Component {
         "Pulsar is a declarative web framework focused on clarity, explicit state and predictable rendering. ",
         A()
             .href("https://pulsar-web.netlify.app/docs")
-            .target(.blank)
+            .target(Target.blank)
             .classes(
               "text-indigo-500 font-medium transition hover:text-indigo-400",
             )(["Read the documentation."]),

@@ -1,4 +1,7 @@
-# 0.3.1
+## 0.3.2
+- Added support for latest version of Pulsar 1.0.1.
+
+## 0.3.1
 - Fix on build command for better deeplinks.
 
 ## 0.3.0

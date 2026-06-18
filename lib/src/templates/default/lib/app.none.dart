@@ -20,7 +20,7 @@ final class App extends Component {
         "Pulsar is a declarative web framework focused on clarity, explicit state and predictable rendering. ",
         A()
             .href("https://pulsar-web.netlify.app/docs")
-            .target(Target.blank)
+            .target(.blank)
             .classes("doc-link")(["Read the documentation."]),
       ]),
 

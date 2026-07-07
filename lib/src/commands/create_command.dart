@@ -76,6 +76,7 @@ class CreateCommand extends Command {
     await copyTemplate(template, destination);
 
     _generatePubspec(destination, projectName);
+    _generateAnalysisOptions(destination);
     _generateMainDart(destination, template);
     _selectIndexHtml(destination, cdn);
     _selectAppAndStyles(destination, cdn);
@@ -85,7 +86,7 @@ class CreateCommand extends Command {
 
     logger.info('Next steps:');
     logger.info('  cd $projectName');
-    logger.info('  dart pub get');
+    logger.info('  pulsar get');
     logger.info('  pulsar serve\n');
   }
 
@@ -140,11 +141,46 @@ environment:
   sdk: ^3.11.5
 
 dependencies:
-  pulsar_web: ^1.0.1
+  pulsar_web: ^1.1.0
   universal_web: ^1.1.1+1
 
 dev_dependencies:
   lints: ^6.0.0
+  custom_lint: ^0.8.1
+  pulsar_lint: ^0.1.0
+''');
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          analysis_options.yaml                             */
+  /* -------------------------------------------------------------------------- */
+
+  void _generateAnalysisOptions(Directory root) {
+    final file = File('${root.path}/analysis_options.yaml');
+
+    file.writeAsStringSync('''
+# This file configures the static analysis results for your project (errors,
+# warnings, and lints).
+#
+# This enables the 'recommended' set of lints from `package:lints`.
+# This set helps identify many issues that may lead to problems when running
+# or consuming Dart code, and enforces writing Dart using a single, idiomatic
+# style and format.
+#
+# If you want a smaller set of lints you can change this to specify
+# 'package:lints/core.yaml'. These are just the most critical lints
+# (the recommended set includes the core lints).
+# The core lints are also what is used by pub.dev for scoring packages.
+include: package:lints/recommended.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+
+# pulsar_lint enforces Pulsar's architectural best practices automatically.
+# Rules are pre-configured in the package — no additional setup needed.
+# Run `pulsar get` to activate the linter after any dependency change.
+# See https://github.com/IgnacioFernandez1311/pulsar_lint for rule details.
 ''');
   }
 

@@ -1,3 +1,8 @@
+## 0.4.0
+- Added `pulsar_lint` support.
+- Added support for latest version of Pulsar 1.1.0.
+- Added new command pulsar get.
+
 ## 0.3.2
 - Added support for latest version of Pulsar 1.0.1.
 

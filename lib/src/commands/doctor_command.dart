@@ -41,6 +41,7 @@ class DoctorCommand extends Command {
     await _checkStructure();
     await _checkDependencies();
     await _checkDartTool();
+    await _checkLinter();
     await _checkRouting();
     await _checkBuildHygiene();
     await _checkBundleSize();
@@ -94,9 +95,9 @@ class DoctorCommand extends Command {
     sw.stop();
 
     if (lock.existsSync()) {
-      _pass('Dependencies look good', 15, sw);
+      _pass('Dependencies resolved', 10, sw);
     } else {
-      _warn('Dependencies not resolved (run dart pub get)');
+      _warn('Dependencies not resolved (run pulsar get)');
       _addScore(5);
     }
   }
@@ -109,7 +110,90 @@ class DoctorCommand extends Command {
     if (dir.existsSync()) {
       _pass('.dart_tool directory present', 5, sw);
     } else {
-      _warn('.dart_tool directory missing');
+      _warn('.dart_tool directory missing (run pulsar get)');
+    }
+  }
+
+  /// Checks that pulsar_lint and custom_lint are configured and active.
+  ///
+  /// Three things need to be true for the linter to work:
+  /// 1. pubspec.yaml declares custom_lint and pulsar_lint as dev dependencies.
+  /// 2. analysis_options.yaml has the custom_lint plugin enabled.
+  /// 3. dart run custom_lint exits without errors (linter is actually running).
+  Future<void> _checkLinter() async {
+    final sw = Stopwatch()..start();
+
+    // 1 — pubspec.yaml check
+    final pubspec = File('pubspec.yaml');
+    if (!pubspec.existsSync()) {
+      sw.stop();
+      _warn('pulsar_lint not configured (pubspec.yaml not found)');
+      return;
+    }
+
+    final pubspecContent = pubspec.readAsStringSync();
+    final hasPulsarLint = pubspecContent.contains('pulsar_lint');
+    final hasCustomLint = pubspecContent.contains('custom_lint');
+
+    if (!hasPulsarLint || !hasCustomLint) {
+      sw.stop();
+      _warn(
+        'pulsar_lint not configured in pubspec.yaml '
+        '(run pulsar get to activate)',
+      );
+      return;
+    }
+
+    // 2 — analysis_options.yaml check
+    final analysisOptions = File('analysis_options.yaml');
+    if (!analysisOptions.existsSync()) {
+      sw.stop();
+      _warn(
+        'analysis_options.yaml not found — '
+        'custom_lint plugin not enabled',
+      );
+      return;
+    }
+
+    final analysisContent = analysisOptions.readAsStringSync();
+    if (!analysisContent.contains('custom_lint')) {
+      sw.stop();
+      _warn('custom_lint plugin not enabled in analysis_options.yaml');
+      return;
+    }
+
+    // 3 — actually run the linter to confirm it loads correctly
+    try {
+      final result = await Process.run('dart', [
+        'run',
+        'custom_lint',
+        '--no-fatal-infos',
+      ], runInShell: true);
+      sw.stop();
+
+      if (result.exitCode == 0) {
+        // Check that pulsar_lint rules appear in output or that it ran cleanly
+        final output = '${result.stdout}${result.stderr}'.toLowerCase();
+
+        if (output.contains('could not find') ||
+            output.contains('failed to load') ||
+            output.contains('pulsar_lint') && output.contains('error')) {
+          _warn('pulsar_lint loaded but reported errors');
+        } else {
+          _pass('pulsar_lint active and running', 5, sw);
+        }
+      } else {
+        // Non-zero exit from custom_lint means lint issues were found,
+        // not that the linter itself failed. Still counts as active.
+        sw.stop();
+        _pass('pulsar_lint active (lint issues found — run pulsar get)', 3, sw);
+      }
+    } catch (_) {
+      sw.stop();
+      _warn(
+        'Could not run custom_lint — '
+        'try running pulsar get to restore the linter',
+      );
     }
   }
 

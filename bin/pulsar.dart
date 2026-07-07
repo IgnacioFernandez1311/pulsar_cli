@@ -4,10 +4,11 @@ import 'package:pulsar_cli/src/commands/build_command.dart';
 import 'package:pulsar_cli/src/commands/clean_command.dart';
 import 'package:pulsar_cli/src/commands/create_command.dart';
 import 'package:pulsar_cli/src/commands/doctor_command.dart';
+import 'package:pulsar_cli/src/commands/get_command.dart';
 import 'package:pulsar_cli/src/commands/serve_command.dart';
 
 Future<void> main(List<String> args) async {
-  final String cliVersion = '0.3.2';
+  final String cliVersion = '0.4.0';
   final CommandRunner runner =
       CommandRunner(
           'pulsar',
@@ -23,6 +24,7 @@ Future<void> main(List<String> args) async {
         ..addCommand(ServeCommand())
         ..addCommand(BuildCommand())
         ..addCommand(CleanCommand())
+        ..addCommand(GetCommand())
         ..addCommand(DoctorCommand());
 
   try {

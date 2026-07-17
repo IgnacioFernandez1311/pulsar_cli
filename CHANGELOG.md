@@ -1,3 +1,6 @@
+## 0.4.2
+- Added support for latest version of Pulsar 1.1.1.
+
 ## 0.4.1
 - `pulsar get` command enhanced for projects without `analysis_options.yaml` file.
 

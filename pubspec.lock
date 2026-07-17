@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: pulsar_web
-      sha256: "4f195604a9b923ab3220dc0876e75be1db46726602895e18664cad95a90ca35e"
+      sha256: "379304809d1c9db216d025925105c82422128469d29c5963d90f21ed3f4fd6e0"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   shelf:
     dependency: transitive
     description:

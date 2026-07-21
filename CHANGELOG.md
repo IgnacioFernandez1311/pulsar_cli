@@ -1,3 +1,6 @@
+## 0.4.3
+- Added support for latest version of Pulsar 1.1.2.
+
 ## 0.4.2
 - Added support for latest version of Pulsar 1.1.1.
 

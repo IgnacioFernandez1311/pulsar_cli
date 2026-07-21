@@ -27,7 +27,7 @@ dependencies:
   universal_web: ^1.1.1+1
   args: ^2.7.0
   path: ^1.9.1
-  pulsar_web: ^1.1.1
+  pulsar_web: ^1.1.2
   interact: ^2.2.0
   mason_logger: ^0.3.3
 

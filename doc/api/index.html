@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="pulsar_cli API docs, for the Dart programming language.">
+  <title>pulsar_cli - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://pulsar-web.netlify.app">pulsar_cli package</a></li>
+  </ol>
+  <div class="self-name">pulsar_cli</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p align="center">
+  <img src="./billboard_img.png" alt="Pulsar" width="740">
+</p>
+<p align="center">
+  <a href="https://github.com/sponsors/IgnacioFernandez1311">
+    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&amp;logo=GitHub-Sponsors&amp;logoColor=white" alt="Sponsor Pulsar">
+  </a>
+</p>
+<h1 id="pulsar-cli">Pulsar CLI</h1>
+<blockquote>
+<p>Official Command Line Interface for the <strong>Pulsar Web Framework</strong></p>
+</blockquote>
+<p>Pulsar CLI provides project scaffolding, dependency management, development server, production builds, environment diagnostics, and advanced tooling designed for a clean and scalable developer experience.</p>
+<hr>
+<h2 id="installation">Installation</h2>
+<p>Activate globally:</p>
+<pre class="language-bash"><code class="language-bash">dart pub global activate pulsar_cli
+</code></pre>
+<p>After activation:</p>
+<pre class="language-bash"><code class="language-bash">pulsar --help
+</code></pre>
+<hr>
+<h2 id="creating-a-project">Creating a project</h2>
+<p>Use the <code>create</code> command to launch the interactive project setup:</p>
+<pre class="language-bash"><code class="language-bash">pulsar create
+</code></pre>
+<p>Or pass options directly to skip the prompts:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--template</code></td>
+<td>Project template</td>
+<td><code>default</code>, <code>minimum</code>, <code>empty</code></td>
+</tr>
+<tr>
+<td><code>--use-cdn</code></td>
+<td>UI CDN integration</td>
+<td><code>none</code>, <code>tailwind</code>, <code>materialize</code></td>
+</tr>
+<tr>
+<td><code>--icons</code></td>
+<td>Icon library</td>
+<td><code>none</code>, <code>material</code>, <code>bootstrap</code></td>
+</tr>
+<tr>
+<td><code>-y</code></td>
+<td>Skip interactive prompts</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre class="language-bash"><code class="language-bash">pulsar create my_app --template default --use-cdn tailwind --icons bootstrap
+</code></pre>
+<p><code>create</code> generates a complete project including <code>pubspec.yaml</code>, <code>analysis_options.yaml</code>, and all template files. The <code>analysis_options.yaml</code> is pre-configured with <code>custom_lint</code> and <code>pulsar_lint</code> so static analysis works from the first run.</p>
+<p>After creating a project, run:</p>
+<pre class="language-bash"><code class="language-bash">cd my_app
+pulsar get
+pulsar serve
+</code></pre>
+<hr>
+<h2 id="dependencies-and-linting">Dependencies and linting</h2>
+<p>Resolve dependencies and run the Pulsar linter in one step:</p>
+<pre class="language-bash"><code class="language-bash">pulsar get
+</code></pre>
+<p>This command always runs <code>dart pub get</code> followed by <code>dart run custom_lint</code>. Running both together ensures the linter plugin is fully initialized after any dependency change — including after <code>pulsar clean</code>, after switching branches, or after a fresh clone.</p>
+<h3 id="options">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--no-pub</code></td>
+<td>Skip <code>dart pub get</code>, only run linter</td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>--no-pub</code> when you know your dependencies are up to date and only want to re-run the linter:</p>
+<pre class="language-bash"><code class="language-bash">pulsar get --no-pub
+</code></pre>
+<h3 id="why-a-dedicated-command">Why a dedicated command?</h3>
+<p><code>dart pub get</code> and <code>dart run custom_lint</code> are related operations that are almost always needed together. <code>pulsar get</code> unifies them under a single command with clear progress output, so you never have to remember to run both manually.</p>
+<hr>
+<h2 id="development-server">Development server</h2>
+<p>Start the Pulsar dev server:</p>
+<pre class="language-bash"><code class="language-bash">pulsar serve
+</code></pre>
+<p>Default port: <code>8080</code></p>
+<h3 id="options-2">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--port</code>, <code>-p</code></td>
+<td>Custom port</td>
+</tr>
+<tr>
+<td><code>--watch</code></td>
+<td>Enable file watching (live reload)</td>
+</tr>
+</tbody>
+</table>
+<p>If <code>--watch</code> is disabled, you can control the server manually:</p>
+<ul>
+<li>Press <code>r</code> → rebuild</li>
+<li>Press <code>q</code> → quit</li>
+</ul>
+<p>The dev server:</p>
+<ul>
+<li>Compiles Dart to JavaScript</li>
+<li>Extracts CSS to avoid FOUC</li>
+<li>Serves assets from <code>.dart_tool/pulsar</code></li>
+<li>Supports SPA routing fallback</li>
+<li>Injects live reload via WebSocket</li>
+</ul>
+<hr>
+<h2 id="production-build">Production build</h2>
+<p>Build for production:</p>
+<pre class="language-bash"><code class="language-bash">pulsar build
+</code></pre>
+<h3 id="options-3">Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--release</code></td>
+<td>Optimized build (default)</td>
+</tr>
+<tr>
+<td><code>--no-release</code></td>
+<td>Development-level compilation</td>
+</tr>
+</tbody>
+</table>
+<p>The build command:</p>
+<ul>
+<li>Compiles Dart to optimized JS</li>
+<li>Extracts precomputed CSS</li>
+<li>Copies static assets</li>
+<li>Generates SPA redirects (<code>_redirects</code>, <code>vercel.json</code>)</li>
+<li>Outputs to <code>build/</code></li>
+</ul>
+<hr>
+<h2 id="environment-diagnostics">Environment diagnostics</h2>
+<p>Check the health of your Pulsar environment:</p>
+<pre class="language-bash"><code class="language-bash">pulsar doctor
+</code></pre>
+<p>Example output:</p>
+<pre class="language-dart"><code>  Pulsar Doctor
+────────────────────────────────
+✓ Dart SDK detected (0ms)
+✓ Project structure valid (1ms)
+✓ Dependencies resolved (2ms)
+✓ .dart_tool directory present (0ms)
+✓ pulsar_lint active and running (312ms)
+✓ Routing base configuration looks valid (0ms)
+✓ CSS extraction present (0ms)
+
+────────────────────────────────
+Score: 97 / 100 (Excellent)
+
+6 checks passed
+</code></pre>
+<p>The doctor verifies:</p>
+<ul>
+<li>Dart SDK availability</li>
+<li>Project structure (<code>web/</code>, <code>lib/</code>, <code>web/main.dart</code>)</li>
+<li>Resolved dependencies (<code>pubspec.lock</code>)</li>
+<li><code>.dart_tool</code> directory presence</li>
+<li><code>pulsar_lint</code> configuration and runtime status</li>
+<li>Routing base (<code>web/index.html</code>)</li>
+<li>Build hygiene (no stale <code>build/</code> directory)</li>
+<li>JS bundle size (if built)</li>
+<li>CSS extraction status</li>
+</ul>
+<h3 id="linter-check">Linter check</h3>
+<p>The doctor validates three things for <code>pulsar_lint</code>:</p>
+<ol>
+<li><code>pubspec.yaml</code> declares <code>custom_lint</code> and <code>pulsar_lint</code> as dev dependencies</li>
+<li><code>analysis_options.yaml</code> has the <code>custom_lint</code> plugin enabled</li>
+<li><code>dart run custom_lint</code> runs without errors</li>
+</ol>
+<p>If any of these fail, the doctor reports what is missing and suggests running <code>pulsar get</code> to restore the linter.</p>
+<h3 id="ci-mode">CI mode</h3>
+<pre class="language-bash"><code class="language-bash">pulsar doctor --ci
+</code></pre>
+<p>In CI mode:</p>
+<ul>
+<li>Output is simplified to a single health score line</li>
+<li>Exit code is <code>1</code> if the health score is below 70</li>
+<li>Designed for GitHub Actions, GitLab CI, and similar pipelines</li>
+</ul>
+<hr>
+<h2 id="clean">Clean</h2>
+<p>Remove internal build artifacts:</p>
+<pre class="language-bash"><code class="language-bash">pulsar clean
+</code></pre>
+<p>This clears:</p>
+<ul>
+<li><code>.dart_tool/pulsar</code></li>
+<li>Compiled JS bundles</li>
+<li>Extracted CSS artifacts</li>
+</ul>
+<p>Useful when debugging build inconsistencies. After cleaning, run <code>pulsar get</code> to restore the linter and <code>pulsar serve</code> to recompile.</p>
+<hr>
+<h2 id="typical-workflow">Typical workflow</h2>
+<pre class="language-bash"><code class="language-bash"># Create and set up a new project
+pulsar create my_app
+cd my_app
+pulsar get
+
+# Develop
+pulsar serve
+
+# After pulling changes or adding dependencies
+pulsar get
+
+# After cleaning build artifacts
+pulsar clean
+pulsar get
+pulsar serve
+
+# Check environment health
+pulsar doctor
+
+# Build for production
+pulsar build
+</code></pre>
+<hr>
+<h2 id="architecture-overview">Architecture overview</h2>
+<p><strong>Pulsar CLI</strong> is built around:</p>
+<ul>
+<li><strong>PulsarCompiler</strong> — centralized compilation pipeline, CSS extraction, output isolation inside <code>.dart_tool/pulsar</code></li>
+<li><strong>DevServer</strong> — WebSocket live reload, manual rebuild mode, SPA fallback support</li>
+<li><strong>Doctor</strong> — environment validation, health scoring, CI-ready diagnostics, linter status check</li>
+</ul>
+<hr>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Dart SDK <code>^3.9.0</code></li>
+<li>Modern browser</li>
+</ul>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="pulsar_cli">
+  <span class="name"><a href="pulsar_cli/">pulsar_cli</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://pulsar-web.netlify.app">pulsar_cli package</a></li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">pulsar_cli</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="pulsar_cli/">pulsar_cli</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    pulsar_cli
+      0.4.3
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

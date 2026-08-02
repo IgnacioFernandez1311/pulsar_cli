@@ -77,7 +77,7 @@ class CreateCommand extends Command {
 
     _generatePubspec(destination, projectName);
     _generateAnalysisOptions(destination);
-    _generateMainDart(destination, template);
+    _generateMainDart(destination, template, projectName);
     _selectIndexHtml(destination, cdn);
     _selectAppAndStyles(destination, cdn);
     _injectIcons(destination, icons);
@@ -141,7 +141,7 @@ environment:
   sdk: ^3.11.5
 
 dependencies:
-  pulsar_web: ^1.1.2
+  pulsar_web: ^1.1.3
   universal_web: ^1.1.1+1
 
 dev_dependencies:
@@ -188,7 +188,7 @@ analyzer:
   /*                              web/main.dart                                 */
   /* -------------------------------------------------------------------------- */
 
-  void _generateMainDart(Directory root, String template) {
+  void _generateMainDart(Directory root, String template, String projectName) {
     final webDir = Directory('${root.path}/web');
     if (!webDir.existsSync()) return;
 
@@ -199,12 +199,24 @@ analyzer:
       return;
     }
 
+    final name = projectName
+        .split('_')
+        .where((s) => s.isNotEmpty)
+        .map((e) => e[0].toUpperCase() + e.substring(1).toLowerCase())
+        .join(' ');
+
     main.writeAsStringSync('''
 import 'package:pulsar_web/pulsar.dart';
 import 'package:${root.path.split(Platform.pathSeparator).last}/app.dart';
 
 void main() {
-  mountApp(App(), selector: "#app");
+AppBuilder()
+    .title("$name")
+    .stylesheet("/styles.css")
+    .meta("charset", "UTF-8")
+    .favicon("/assets/favicon.png")
+    .lang("en")
+    .mount(() => App());
 }
 ''');
   }

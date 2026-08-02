@@ -1,3 +1,9 @@
+## 0.4.4
+- Added support for latest version of Pulsar 1.1.3.
+- Added Billboard.
+- Templates updated.
+- Use of `AppBuilder` for configuration.
+
 ## 0.4.3
 - Added support for latest version of Pulsar 1.1.2.
 

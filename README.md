@@ -1,4 +1,14 @@
-# pulsar_cli
+<p align="center">
+  <img src="./billboard_img.png" alt="Pulsar" width="740">
+</p>
+
+<p align="center">
+  <a href="https://github.com/sponsors/IgnacioFernandez1311">
+    <img src="https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=white" alt="Sponsor Pulsar">
+  </a>
+</p>
+
+# Pulsar CLI
 
 > Official Command Line Interface for the **Pulsar Web Framework**
 

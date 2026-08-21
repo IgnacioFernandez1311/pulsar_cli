@@ -44,7 +44,7 @@ Or pass options directly to skip the prompts:
 
 | Option        | Description              | Values                            |
 | ------------- | ------------------------ | --------------------------------- |
-| `--template`  | Project template         | `default`, `minimum`, `empty`     |
+| `--template`  | Project template         | `default`, `minimum`, `empty`, `todo`     |
 | `--use-cdn`   | UI CDN integration       | `none`, `tailwind`, `materialize` |
 | `--icons`     | Icon library             | `none`, `material`, `bootstrap`   |
 | `-y`          | Skip interactive prompts | —                                 |

@@ -1,3 +1,7 @@
+## 0.4.5
+- Added support for latest version of Pulsar 1.1.4.
+- Added new Todo app template.
+
 ## 0.4.4
 - Added support for latest version of Pulsar 1.1.3.
 - Added Billboard.

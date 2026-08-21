@@ -102,7 +102,7 @@ class CreateCommand extends Command {
   }
 
   String _selectTemplate() {
-    final options = ['default', 'minimum', 'empty'];
+    final options = ['default', 'minimum', 'empty', 'todo'];
     final index = Select(
       prompt: 'Choose template',
       options: options,
@@ -141,13 +141,13 @@ environment:
   sdk: ^3.11.5
 
 dependencies:
-  pulsar_web: ^1.1.3
+  pulsar_web: ^1.1.4
   universal_web: ^1.1.1+1
 
 dev_dependencies:
   lints: ^6.0.0
   custom_lint: ^0.8.1
-  pulsar_lint: ^0.1.0
+  pulsar_lint: ^0.1.1
 ''');
   }
 
